@@ -1,7 +1,5 @@
-﻿using Microsoft.Owin;
-using Owin;
+﻿using Owin;
 
-[assembly: OwinStartupAttribute(typeof(CommunitySpaceShip.Startup))]
 namespace CommunitySpaceShip
 {
     public partial class Startup
