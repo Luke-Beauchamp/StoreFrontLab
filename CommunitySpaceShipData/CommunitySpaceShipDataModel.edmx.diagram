@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b3ae7f48fd394b988faaf73575f314bc" Name="Diagram1">
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.Neighbor" Width="1.5" PointX="10.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.Region" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.SpaceShip" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.SpaceShipStatus" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.Status" Width="1.5" PointX="8" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.TeamFocu" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CommunitySpaceShipModel.Team" Width="1.5" PointX="8" PointY="1.375" IsExpanded="true" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_Neighbors_Statuses" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_Neighbors_Teams" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_SpaceShips_Regions" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_SpaceShips_SpaceShipStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_SpaceShips_SpaceShipStatuses1" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_SpaceShips_SpaceShipStatuses2" ManuallyRouted="false" />
+        <AssociationConnector Association="CommunitySpaceShipModel.FK_Teams_TeamFocus" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

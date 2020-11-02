@@ -1,0 +1,497 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CommunitySpaceShipModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Neighbors">
+          <Key>
+            <PropertyRef Name="NeighborID" />
+          </Key>
+          <Property Name="NeighborID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="SpaceShipID" Type="int" Nullable="false" />
+          <Property Name="TeamID" Type="int" Nullable="false" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="IsMobile" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpaceShips">
+          <Key>
+            <PropertyRef Name="SpaceShipID" />
+          </Key>
+          <Property Name="SpaceShipID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommunityName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="ServiceStatus" Type="int" Nullable="false" />
+          <Property Name="ProductionStatus" Type="int" Nullable="false" />
+          <Property Name="EducationStatus" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpaceShipStatuses">
+          <Key>
+            <PropertyRef Name="S_StatusID" />
+          </Key>
+          <Property Name="S_StatusID" Type="int" Nullable="false" />
+          <Property Name="TeamAvailable" Type="bit" Nullable="false" />
+          <Property Name="TeamMobile" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Statuses">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Position" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TeamFocus">
+          <Key>
+            <PropertyRef Name="FocusID" />
+          </Key>
+          <Property Name="FocusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceAble" Type="bit" Nullable="false" />
+          <Property Name="ProductionAble" Type="bit" Nullable="false" />
+          <Property Name="EducationAble" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FocusID" Type="int" Nullable="false" />
+          <Property Name="IsAvailable" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Neighbors_Statuses">
+          <End Role="Statuses" Type="Self.Statuses" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Neighbors_Teams">
+          <End Role="Teams" Type="Self.Teams" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatuses" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="ServiceStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses1">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatuses" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="ProductionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses2">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatuses" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="EducationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teams_TeamFocus">
+          <End Role="TeamFocus" Type="Self.TeamFocus" Multiplicity="1" />
+          <End Role="Teams" Type="Self.Teams" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamFocus">
+              <PropertyRef Name="FocusID" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="FocusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommunitySpaceShipModelStoreContainer">
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpaceShips" EntityType="Self.SpaceShips" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpaceShipStatuses" EntityType="Self.SpaceShipStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statuses" EntityType="Self.Statuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TeamFocus" EntityType="Self.TeamFocus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Neighbors_Statuses" Association="Self.FK_Neighbors_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Neighbors_Teams" Association="Self.FK_Neighbors_Teams">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_Regions" Association="Self.FK_SpaceShips_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses" Association="Self.FK_SpaceShips_SpaceShipStatuses">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses1" Association="Self.FK_SpaceShips_SpaceShipStatuses1">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses2" Association="Self.FK_SpaceShips_SpaceShipStatuses2">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teams_TeamFocus" Association="Self.FK_Teams_TeamFocus">
+            <End Role="TeamFocus" EntitySet="TeamFocus" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommunitySpaceShipModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Neighbor">
+          <Key>
+            <PropertyRef Name="NeighborID" />
+          </Key>
+          <Property Name="NeighborID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SpaceShipID" Type="Int32" Nullable="false" />
+          <Property Name="TeamID" Type="Int32" Nullable="false" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="IsMobile" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Neighbors_Statuses" FromRole="Neighbors" ToRole="Statuses" />
+          <NavigationProperty Name="Team" Relationship="Self.FK_Neighbors_Teams" FromRole="Neighbors" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="SpaceShips" Relationship="Self.FK_SpaceShips_Regions" FromRole="Regions" ToRole="SpaceShips" />
+        </EntityType>
+        <EntityType Name="SpaceShip">
+          <Key>
+            <PropertyRef Name="SpaceShipID" />
+          </Key>
+          <Property Name="SpaceShipID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommunityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ServiceStatus" Type="Int32" Nullable="false" />
+          <Property Name="ProductionStatus" Type="Int32" Nullable="false" />
+          <Property Name="EducationStatus" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_SpaceShips_Regions" FromRole="SpaceShips" ToRole="Regions" />
+          <NavigationProperty Name="SpaceShipStatus" Relationship="Self.FK_SpaceShips_SpaceShipStatuses" FromRole="SpaceShips" ToRole="SpaceShipStatuses" />
+          <NavigationProperty Name="SpaceShipStatus1" Relationship="Self.FK_SpaceShips_SpaceShipStatuses1" FromRole="SpaceShips" ToRole="SpaceShipStatuses" />
+          <NavigationProperty Name="SpaceShipStatus2" Relationship="Self.FK_SpaceShips_SpaceShipStatuses2" FromRole="SpaceShips" ToRole="SpaceShipStatuses" />
+        </EntityType>
+        <EntityType Name="SpaceShipStatus">
+          <Key>
+            <PropertyRef Name="S_StatusID" />
+          </Key>
+          <Property Name="S_StatusID" Type="Int32" Nullable="false" />
+          <Property Name="TeamAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="TeamMobile" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="SpaceShips" Relationship="Self.FK_SpaceShips_SpaceShipStatuses" FromRole="SpaceShipStatuses" ToRole="SpaceShips" />
+          <NavigationProperty Name="SpaceShips1" Relationship="Self.FK_SpaceShips_SpaceShipStatuses1" FromRole="SpaceShipStatuses" ToRole="SpaceShips" />
+          <NavigationProperty Name="SpaceShips2" Relationship="Self.FK_SpaceShips_SpaceShipStatuses2" FromRole="SpaceShipStatuses" ToRole="SpaceShips" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="StatusID" />
+          </Key>
+          <Property Name="StatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Position" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Neighbors" Relationship="Self.FK_Neighbors_Statuses" FromRole="Statuses" ToRole="Neighbors" />
+        </EntityType>
+        <EntityType Name="TeamFocu">
+          <Key>
+            <PropertyRef Name="FocusID" />
+          </Key>
+          <Property Name="FocusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceAble" Type="Boolean" Nullable="false" />
+          <Property Name="ProductionAble" Type="Boolean" Nullable="false" />
+          <Property Name="EducationAble" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Teams" Relationship="Self.FK_Teams_TeamFocus" FromRole="TeamFocus" ToRole="Teams" />
+        </EntityType>
+        <EntityType Name="Team">
+          <Key>
+            <PropertyRef Name="TeamID" />
+          </Key>
+          <Property Name="TeamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FocusID" Type="Int32" Nullable="false" />
+          <Property Name="IsAvailable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Neighbors" Relationship="Self.FK_Neighbors_Teams" FromRole="Teams" ToRole="Neighbors" />
+          <NavigationProperty Name="TeamFocu" Relationship="Self.FK_Teams_TeamFocus" FromRole="Teams" ToRole="TeamFocus" />
+        </EntityType>
+        <Association Name="FK_Neighbors_Statuses">
+          <End Role="Statuses" Type="Self.Status" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statuses">
+              <PropertyRef Name="StatusID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Neighbors_Teams">
+          <End Role="Teams" Type="Self.Team" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Teams">
+              <PropertyRef Name="TeamID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="TeamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_Regions">
+          <End Role="Regions" Type="Self.Region" Multiplicity="0..1" />
+          <End Role="SpaceShips" Type="Self.SpaceShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatus" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="ServiceStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses1">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatus" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="ProductionStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SpaceShips_SpaceShipStatuses2">
+          <End Role="SpaceShipStatuses" Type="Self.SpaceShipStatus" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShipStatuses">
+              <PropertyRef Name="S_StatusID" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="EducationStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teams_TeamFocus">
+          <End Role="TeamFocus" Type="Self.TeamFocu" Multiplicity="1" />
+          <End Role="Teams" Type="Self.Team" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TeamFocus">
+              <PropertyRef Name="FocusID" />
+            </Principal>
+            <Dependent Role="Teams">
+              <PropertyRef Name="FocusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommunitySpaceShipEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbor" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="SpaceShips" EntityType="Self.SpaceShip" />
+          <EntitySet Name="SpaceShipStatuses" EntityType="Self.SpaceShipStatus" />
+          <EntitySet Name="Statuses" EntityType="Self.Status" />
+          <EntitySet Name="TeamFocus" EntityType="Self.TeamFocu" />
+          <EntitySet Name="Teams" EntityType="Self.Team" />
+          <AssociationSet Name="FK_Neighbors_Statuses" Association="Self.FK_Neighbors_Statuses">
+            <End Role="Statuses" EntitySet="Statuses" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Neighbors_Teams" Association="Self.FK_Neighbors_Teams">
+            <End Role="Teams" EntitySet="Teams" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_Regions" Association="Self.FK_SpaceShips_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses" Association="Self.FK_SpaceShips_SpaceShipStatuses">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses1" Association="Self.FK_SpaceShips_SpaceShipStatuses1">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SpaceShips_SpaceShipStatuses2" Association="Self.FK_SpaceShips_SpaceShipStatuses2">
+            <End Role="SpaceShipStatuses" EntitySet="SpaceShipStatuses" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teams_TeamFocus" Association="Self.FK_Teams_TeamFocus">
+            <End Role="TeamFocus" EntitySet="TeamFocus" />
+            <End Role="Teams" EntitySet="Teams" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommunitySpaceShipModelStoreContainer" CdmEntityContainer="CommunitySpaceShipEntities">
+          <EntitySetMapping Name="Neighbors">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.Neighbor">
+              <MappingFragment StoreEntitySet="Neighbors">
+                <ScalarProperty Name="NeighborID" ColumnName="NeighborID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="SpaceShipID" ColumnName="SpaceShipID" />
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="IsMobile" ColumnName="IsMobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpaceShips">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.SpaceShip">
+              <MappingFragment StoreEntitySet="SpaceShips">
+                <ScalarProperty Name="SpaceShipID" ColumnName="SpaceShipID" />
+                <ScalarProperty Name="CommunityName" ColumnName="CommunityName" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ServiceStatus" ColumnName="ServiceStatus" />
+                <ScalarProperty Name="ProductionStatus" ColumnName="ProductionStatus" />
+                <ScalarProperty Name="EducationStatus" ColumnName="EducationStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpaceShipStatuses">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.SpaceShipStatus">
+              <MappingFragment StoreEntitySet="SpaceShipStatuses">
+                <ScalarProperty Name="S_StatusID" ColumnName="S_StatusID" />
+                <ScalarProperty Name="TeamAvailable" ColumnName="TeamAvailable" />
+                <ScalarProperty Name="TeamMobile" ColumnName="TeamMobile" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statuses">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.Status">
+              <MappingFragment StoreEntitySet="Statuses">
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TeamFocus">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.TeamFocu">
+              <MappingFragment StoreEntitySet="TeamFocus">
+                <ScalarProperty Name="FocusID" ColumnName="FocusID" />
+                <ScalarProperty Name="ServiceAble" ColumnName="ServiceAble" />
+                <ScalarProperty Name="ProductionAble" ColumnName="ProductionAble" />
+                <ScalarProperty Name="EducationAble" ColumnName="EducationAble" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="CommunitySpaceShipModel.Team">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="TeamID" ColumnName="TeamID" />
+                <ScalarProperty Name="FocusID" ColumnName="FocusID" />
+                <ScalarProperty Name="IsAvailable" ColumnName="IsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
