@@ -1,77 +1,40 @@
 ﻿@model CommunitySpaceShip.Models.IndexViewModel
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Manage your account";
 }
 
-<h2>@ViewBag.Title.</h2>
-<p class="text-success">@ViewBag.StatusMessage</p>
-<div class="row">
-    <div class="col-md-8">
-        <p>
-            @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword") 
-                : Html.ActionLink("Pick a password", "SetPassword"))
-        </p>
-        <p>
-            Phone Number: @(Model.PhoneNumber ?? "None") [
-            @if (Model.PhoneNumber != null)
-            {
-                @Html.ActionLink("Change", "AddPhoneNumber")
-                @: &nbsp;|&nbsp;
-                @Html.ActionLink("Remove", "RemovePhoneNumber")
-            }
-            else
-            {
-                @Html.ActionLink("Add", "AddPhoneNumber")
-            }
-            ]
-        </p>
-        <p>
-            External Logins: @Model.Logins.Count
-            @Html.ActionLink("[Manage]", "ManageLogins")
-        </p>
-        @if (Model.TwoFactor)
-        {
-            using (Html.BeginForm("DisableTFA", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                 @Html.AntiForgeryToken()
-                 <p>
-                     Two factor is currently enabled:
-                     <input type="submit" value="Disable" class="btn btn-default"/>
-                 </p>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("EnableTFA", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Two factor is currently disabled:
-                    <input type="submit" value="Enable" class="btn btn-default"/>
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-white font-weight-bold">Welcome Back,</h1>
+                <hr class="divider my-4" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 font-weight-light mb-5">
+                    @User.Identity.GetUserName()
                 </p>
-            }
-        }
-        @if (Model.BrowserRemembered)
-        {
-            using (Html.BeginForm("ForgetBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently remembered for two factor:
-                    <input type="submit" value="Forget Browser" class="btn btn-default" />
-                </p>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("RememberBrowser", "Manage", FormMethod.Post, new {@class = "form-horizontal", role = "form"}))
-            {
-                @Html.AntiForgeryToken()
-                <p>
-                    Browser is curently not remembered for two factor:
-                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
-                </p>
-            }
-        }
+                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#manage">Manage Profile</a>
+            </div>
+        </div>
     </div>
-</div>
+</header>
+
+<!-- Profile-->
+<section class="page-section bg-primary" id="manage">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h3 class="text-white mt-0">
+                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
+                : Html.ActionLink("Pick a password", "SetPassword"))
+                            </h3>
+                <hr class="divider light my-4" />
+                <p class="text-white-50 mb-4">Not what you're looking for?</p>
+                <a class="btn btn-light btn-xl js-scroll-trigger" href="#information">Continue</a>
+            </div>
+        </div>
+    </div>
+</section>
+
