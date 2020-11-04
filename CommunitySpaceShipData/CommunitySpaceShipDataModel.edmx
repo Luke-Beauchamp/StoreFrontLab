@@ -1,0 +1,546 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CommunityGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Neighbors">
+          <Key>
+            <PropertyRef Name="NeighborID" />
+          </Key>
+          <Property Name="NeighborID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="ProduceAvailable" Type="bit" Nullable="false" />
+          <Property Name="DairyAvailable" Type="bit" Nullable="false" />
+          <Property Name="EggsAvailable" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parks">
+          <Key>
+            <PropertyRef Name="ParkID" />
+          </Key>
+          <Property Name="ParkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="13" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RegionDescription" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Shareables">
+          <Key>
+            <PropertyRef Name="ShareableID" />
+          </Key>
+          <Property Name="ShareableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShareableName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ShareEvents">
+          <Key>
+            <PropertyRef Name="ShareEventID" />
+          </Key>
+          <Property Name="ShareEventID" Type="int" Nullable="false" />
+          <Property Name="ParkID" Type="int" Nullable="false" />
+          <Property Name="Coordinator" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="StartTime" Type="tinyint" Nullable="false" />
+          <Property Name="EndTime" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SharePackages">
+          <Key>
+            <PropertyRef Name="SharePackageID" />
+          </Key>
+          <Property Name="SharePackageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ShareableID" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="ShareEventID" Type="int" Nullable="false" />
+          <Property Name="NeighborID" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Neighbors_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parks_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="1" />
+          <End Role="Parks" Type="Self.Parks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="Parks">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Shareables_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+          <End Role="Shareables" Type="Self.Shareables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Shareables">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShareEvents_Neighbors">
+          <End Role="Neighbors" Type="Self.Neighbors" Multiplicity="1" />
+          <End Role="ShareEvents" Type="Self.ShareEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighbors">
+              <PropertyRef Name="NeighborID" />
+            </Principal>
+            <Dependent Role="ShareEvents">
+              <PropertyRef Name="Coordinator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShareEvents_Parks">
+          <End Role="Parks" Type="Self.Parks" Multiplicity="1" />
+          <End Role="ShareEvents" Type="Self.ShareEvents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parks">
+              <PropertyRef Name="ParkID" />
+            </Principal>
+            <Dependent Role="ShareEvents">
+              <PropertyRef Name="ParkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_Neighbors">
+          <End Role="Neighbors" Type="Self.Neighbors" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighbors">
+              <PropertyRef Name="NeighborID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="NeighborID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_Shareables">
+          <End Role="Shareables" Type="Self.Shareables" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shareables">
+              <PropertyRef Name="ShareableID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="ShareableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_ShareEvents">
+          <End Role="ShareEvents" Type="Self.ShareEvents" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareEvents">
+              <PropertyRef Name="ShareEventID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="ShareEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommunityGardenModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parks" EntityType="Self.Parks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Shareables" EntityType="Self.Shareables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShareEvents" EntityType="Self.ShareEvents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SharePackages" EntityType="Self.SharePackages" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Neighbors_Regions" Association="Self.FK_Neighbors_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parks_Regions" Association="Self.FK_Parks_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Parks" EntitySet="Parks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Shareables_Categories" Association="Self.FK_Shareables_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Shareables" EntitySet="Shareables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShareEvents_Neighbors" Association="Self.FK_ShareEvents_Neighbors">
+            <End Role="Neighbors" EntitySet="Neighbors" />
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShareEvents_Parks" Association="Self.FK_ShareEvents_Parks">
+            <End Role="Parks" EntitySet="Parks" />
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_Neighbors" Association="Self.FK_SharePackages_Neighbors">
+            <End Role="Neighbors" EntitySet="Neighbors" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_Shareables" Association="Self.FK_SharePackages_Shareables">
+            <End Role="Shareables" EntitySet="Shareables" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_ShareEvents" Association="Self.FK_SharePackages_ShareEvents">
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CommunityGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Shareables" Relationship="Self.FK_Shareables_Categories" FromRole="Categories" ToRole="Shareables" />
+        </EntityType>
+        <EntityType Name="Neighbor">
+          <Key>
+            <PropertyRef Name="NeighborID" />
+          </Key>
+          <Property Name="NeighborID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RegionID" Type="Int32" Nullable="false" />
+          <Property Name="ProduceAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="DairyAvailable" Type="Boolean" Nullable="false" />
+          <Property Name="EggsAvailable" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Neighbors_Regions" FromRole="Neighbors" ToRole="Regions" />
+          <NavigationProperty Name="ShareEvents" Relationship="Self.FK_ShareEvents_Neighbors" FromRole="Neighbors" ToRole="ShareEvents" />
+          <NavigationProperty Name="SharePackages" Relationship="Self.FK_SharePackages_Neighbors" FromRole="Neighbors" ToRole="SharePackages" />
+        </EntityType>
+        <EntityType Name="Park">
+          <Key>
+            <PropertyRef Name="ParkID" />
+          </Key>
+          <Property Name="ParkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionID" Type="Int32" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="Self.FK_Parks_Regions" FromRole="Parks" ToRole="Regions" />
+          <NavigationProperty Name="ShareEvents" Relationship="Self.FK_ShareEvents_Parks" FromRole="Parks" ToRole="ShareEvents" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="RegionID" />
+          </Key>
+          <Property Name="RegionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RegionDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Neighbors" Relationship="Self.FK_Neighbors_Regions" FromRole="Regions" ToRole="Neighbors" />
+          <NavigationProperty Name="Parks" Relationship="Self.FK_Parks_Regions" FromRole="Regions" ToRole="Parks" />
+        </EntityType>
+        <EntityType Name="Shareable">
+          <Key>
+            <PropertyRef Name="ShareableID" />
+          </Key>
+          <Property Name="ShareableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShareableName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Shareables_Categories" FromRole="Shareables" ToRole="Categories" />
+          <NavigationProperty Name="SharePackages" Relationship="Self.FK_SharePackages_Shareables" FromRole="Shareables" ToRole="SharePackages" />
+        </EntityType>
+        <EntityType Name="ShareEvent">
+          <Key>
+            <PropertyRef Name="ShareEventID" />
+          </Key>
+          <Property Name="ShareEventID" Type="Int32" Nullable="false" />
+          <Property Name="ParkID" Type="Int32" Nullable="false" />
+          <Property Name="Coordinator" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="StartTime" Type="Byte" Nullable="false" />
+          <Property Name="EndTime" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="Neighbor" Relationship="Self.FK_ShareEvents_Neighbors" FromRole="ShareEvents" ToRole="Neighbors" />
+          <NavigationProperty Name="Park" Relationship="Self.FK_ShareEvents_Parks" FromRole="ShareEvents" ToRole="Parks" />
+          <NavigationProperty Name="SharePackages" Relationship="Self.FK_SharePackages_ShareEvents" FromRole="ShareEvents" ToRole="SharePackages" />
+        </EntityType>
+        <EntityType Name="SharePackage">
+          <Key>
+            <PropertyRef Name="SharePackageID" />
+          </Key>
+          <Property Name="SharePackageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ShareableID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="ShareEventID" Type="Int32" Nullable="false" />
+          <Property Name="NeighborID" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Neighbor" Relationship="Self.FK_SharePackages_Neighbors" FromRole="SharePackages" ToRole="Neighbors" />
+          <NavigationProperty Name="Shareable" Relationship="Self.FK_SharePackages_Shareables" FromRole="SharePackages" ToRole="Shareables" />
+          <NavigationProperty Name="ShareEvent" Relationship="Self.FK_SharePackages_ShareEvents" FromRole="SharePackages" ToRole="ShareEvents" />
+        </EntityType>
+        <Association Name="FK_Shareables_Categories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="1" />
+          <End Role="Shareables" Type="Self.Shareable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Shareables">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Neighbors_Regions">
+          <End Role="Regions" Type="Self.Region" Multiplicity="1" />
+          <End Role="Neighbors" Type="Self.Neighbor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="Neighbors">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShareEvents_Neighbors">
+          <End Role="Neighbors" Type="Self.Neighbor" Multiplicity="1" />
+          <End Role="ShareEvents" Type="Self.ShareEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighbors">
+              <PropertyRef Name="NeighborID" />
+            </Principal>
+            <Dependent Role="ShareEvents">
+              <PropertyRef Name="Coordinator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_Neighbors">
+          <End Role="Neighbors" Type="Self.Neighbor" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Neighbors">
+              <PropertyRef Name="NeighborID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="NeighborID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Parks_Regions">
+          <End Role="Regions" Type="Self.Region" Multiplicity="1" />
+          <End Role="Parks" Type="Self.Park" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="RegionID" />
+            </Principal>
+            <Dependent Role="Parks">
+              <PropertyRef Name="RegionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShareEvents_Parks">
+          <End Role="Parks" Type="Self.Park" Multiplicity="1" />
+          <End Role="ShareEvents" Type="Self.ShareEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parks">
+              <PropertyRef Name="ParkID" />
+            </Principal>
+            <Dependent Role="ShareEvents">
+              <PropertyRef Name="ParkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_Shareables">
+          <End Role="Shareables" Type="Self.Shareable" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shareables">
+              <PropertyRef Name="ShareableID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="ShareableID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SharePackages_ShareEvents">
+          <End Role="ShareEvents" Type="Self.ShareEvent" Multiplicity="1" />
+          <End Role="SharePackages" Type="Self.SharePackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShareEvents">
+              <PropertyRef Name="ShareEventID" />
+            </Principal>
+            <Dependent Role="SharePackages">
+              <PropertyRef Name="ShareEventID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CommunityGardenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Neighbors" EntityType="Self.Neighbor" />
+          <EntitySet Name="Parks" EntityType="Self.Park" />
+          <EntitySet Name="Regions" EntityType="Self.Region" />
+          <EntitySet Name="Shareables" EntityType="Self.Shareable" />
+          <EntitySet Name="ShareEvents" EntityType="Self.ShareEvent" />
+          <EntitySet Name="SharePackages" EntityType="Self.SharePackage" />
+          <AssociationSet Name="FK_Shareables_Categories" Association="Self.FK_Shareables_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Shareables" EntitySet="Shareables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Neighbors_Regions" Association="Self.FK_Neighbors_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Neighbors" EntitySet="Neighbors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShareEvents_Neighbors" Association="Self.FK_ShareEvents_Neighbors">
+            <End Role="Neighbors" EntitySet="Neighbors" />
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_Neighbors" Association="Self.FK_SharePackages_Neighbors">
+            <End Role="Neighbors" EntitySet="Neighbors" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Parks_Regions" Association="Self.FK_Parks_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Parks" EntitySet="Parks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShareEvents_Parks" Association="Self.FK_ShareEvents_Parks">
+            <End Role="Parks" EntitySet="Parks" />
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_Shareables" Association="Self.FK_SharePackages_Shareables">
+            <End Role="Shareables" EntitySet="Shareables" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SharePackages_ShareEvents" Association="Self.FK_SharePackages_ShareEvents">
+            <End Role="ShareEvents" EntitySet="ShareEvents" />
+            <End Role="SharePackages" EntitySet="SharePackages" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CommunityGardenModelStoreContainer" CdmEntityContainer="CommunityGardenEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="CommunityGardenModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Neighbors">
+            <EntityTypeMapping TypeName="CommunityGardenModel.Neighbor">
+              <MappingFragment StoreEntitySet="Neighbors">
+                <ScalarProperty Name="NeighborID" ColumnName="NeighborID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="ProduceAvailable" ColumnName="ProduceAvailable" />
+                <ScalarProperty Name="DairyAvailable" ColumnName="DairyAvailable" />
+                <ScalarProperty Name="EggsAvailable" ColumnName="EggsAvailable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parks">
+            <EntityTypeMapping TypeName="CommunityGardenModel.Park">
+              <MappingFragment StoreEntitySet="Parks">
+                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="CommunityGardenModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="RegionDescription" ColumnName="RegionDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Shareables">
+            <EntityTypeMapping TypeName="CommunityGardenModel.Shareable">
+              <MappingFragment StoreEntitySet="Shareables">
+                <ScalarProperty Name="ShareableID" ColumnName="ShareableID" />
+                <ScalarProperty Name="ShareableName" ColumnName="ShareableName" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShareEvents">
+            <EntityTypeMapping TypeName="CommunityGardenModel.ShareEvent">
+              <MappingFragment StoreEntitySet="ShareEvents">
+                <ScalarProperty Name="ShareEventID" ColumnName="ShareEventID" />
+                <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+                <ScalarProperty Name="Coordinator" ColumnName="Coordinator" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SharePackages">
+            <EntityTypeMapping TypeName="CommunityGardenModel.SharePackage">
+              <MappingFragment StoreEntitySet="SharePackages">
+                <ScalarProperty Name="SharePackageID" ColumnName="SharePackageID" />
+                <ScalarProperty Name="ShareableID" ColumnName="ShareableID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="ShareEventID" ColumnName="ShareEventID" />
+                <ScalarProperty Name="NeighborID" ColumnName="NeighborID" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

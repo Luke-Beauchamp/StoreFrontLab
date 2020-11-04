@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+<ul class="navbar-nav ml-auto my-2 my-lg-0 myDropdownLink">
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Community Gardens
+        </a>
+        <div class="dropdown-menu myDropdown" aria-labelledby="navbarDropdown">
+            <a class="nav-link myDropdownLink" href="@Url.Action("About","Home")">About</a>@*Will be About of Home Controller*@
+            <a class="nav-link myDropdownLink" href="#">Sharing Events</a>@*Will be index of ShareEvents Controller*@
+            <a class="nav-link myDropdownLink" href="#">My Share Packages</a>@*Will be index of SharePackages Controller*@
+        </div>
+    </li>
+</ul>
+}
+else
+{
+    <ul class="navbar-nav ml-auto my-2 my-lg-0">
+        <li class="nav-item"><a class="nav-link" href="@Url.Action("About","Home")">Community Gardens</a></li>@*Will be About of Home Controller*@
+    </ul>
+}

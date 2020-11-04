@@ -170,7 +170,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\NeighborsController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
@@ -184,6 +183,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\img\bg-abouthead.jpg" />
     <Content Include="Content\assets\img\bg-masthead.jpg" />
     <Content Include="Content\assets\img\favicon.ico" />
     <Content Include="Content\assets\img\portfolio\fullsize\1.jpg" />
@@ -286,13 +286,10 @@
     <Content Include="Views\RolesAdmin\Delete.cshtml" />
     <Content Include="Views\RolesAdmin\Create.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
-    <Content Include="Views\Neighbors\Create.cshtml" />
-    <Content Include="Views\Neighbors\Delete.cshtml" />
-    <Content Include="Views\Neighbors\Details.cshtml" />
-    <Content Include="Views\Neighbors\Edit.cshtml" />
-    <Content Include="Views\Neighbors\Index.cshtml" />
     <Content Include="Views\Shared\_OriginalLayout.cshtml" />
     <Content Include="Views\Shared\_OriginalLoginPartial.cshtml" />
+    <Content Include="Views\Shared\_CommunityGardenPartial.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

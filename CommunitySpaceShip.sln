@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.1169
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunitySpaceShip", "CommunitySpaceShip\CommunitySpaceShip.csproj", "{D64D57A5-7AE0-4285-8E66-D1D7AD2B1525}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunitySpaceShipData", "CommunitySpaceShipData\CommunitySpaceShipData.csproj", "{DE640CA5-9FFB-4E28-A14C-628A4660D62E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{D64D57A5-7AE0-4285-8E66-D1D7AD2B1525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D64D57A5-7AE0-4285-8E66-D1D7AD2B1525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D64D57A5-7AE0-4285-8E66-D1D7AD2B1525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE640CA5-9FFB-4E28-A14C-628A4660D62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE640CA5-9FFB-4E28-A14C-628A4660D62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE640CA5-9FFB-4E28-A14C-628A4660D62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE640CA5-9FFB-4E28-A14C-628A4660D62E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

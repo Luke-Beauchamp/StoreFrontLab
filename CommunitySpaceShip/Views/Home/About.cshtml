@@ -1,12 +1,84 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About Community Gardens";
 }
-<hgroup>
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
-</hgroup>
-<div class="row-fluid">
-    <div class="span12">
-        <p>Use this area to provide additional information.</p>
+
+<header class="masthead aboutHead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-white font-weight-bold">Community Garden</h1>
+                <hr class="divider my-4" />
+            </div>
+            <div class="col-lg-8 align-self-baseline">
+                <p class="text-white-75 font-weight-light mb-5">
+                    The driving force of this project is <em>you</em>!  You are a capable, and strong human being.  Relish in the fact that you are not alone, and together we can make a huge impact in our communities.
+                </p>
+                <a class="btn btn-xl js-scroll-trigger myBtn text-white" href="#ShareEvents">Find Out How</a>
+            </div>
+        </div>
     </div>
-</div>
+</header>
+<!-- How-->
+<section class="page-section myBackground" id="ShareEvents">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="myBlacktext mt-0">Share Events</h2>
+                <hr class="divider light my-4" />
+                <p class="myBlacktext mb-4">
+                    Coming together as a community has never been easier.  At <strong>Share Events</strong> people can bring produce, meats, and dairy to share with their community.  Others in need of such items can partake in these events to share in the community's resources.  When people come together out of the goodness of their hearts to take care of each other, <em>that's</em> community.
+                </p>
+                <a class="btn btn-xl myLightBtn js-scroll-trigger myBlacktext" href="#howItWorks">How It Works</a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Services-->
+<section class="page-section bg-light" id="howItWorks">
+    <div class="container">
+        <h2 class="text-center mt-0">Neighbors</h2>
+        <hr class="divider my-4" />
+        <div class="row">
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <i class="fas fa-4x fa-users myIcon mb-4"></i>
+                    <h3 class="h4 mb-2">Set a Date</h3>
+                    <p class="text-muted mb-0">A community coordinator will share a date for the next upcoming Share Event.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <i class="far fa-4x fa-comments myIcon mb-4"></i>
+                    <h3 class="h4 mb-2">Share Packages</h3>
+                    <p class="text-muted mb-0">Once a Share Event is posted, it becomes available to create Share Packages for.  These Share Packages include anything from fruits and vegetables, to meats and cheeses &mdash; whatever you can contribute towards feeding the community.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <i class="far fa-4x fa-handshake myIcon mb-4"></i>
+                    <h3 class="h4 mb-2">Request Packages</h3>
+                    <p class="text-muted mb-0">Once Share Packages start being created, neighbors are able to request customized packages, based on the available resources of the Share Event.  We keep this process internal, but strongly encourage sharing these packages with anyone you know who is in need of them.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 text-center">
+                <div class="mt-5">
+                    <i class="fas fa-4x fa-heart myIcon mb-4"></i>
+                    <h3 class="h4 mb-2">Gather</h3>
+                    <p class="text-muted mb-0">The day of we will gather to celebrate our community and enjoy the company of one another.  Although the focus is food distribution, the events are usually preceded or followed by social gatherings within the community.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Call to action-->
+<section class="page-section myBackground">
+    <div class="container text-center">
+        <h2 class="mb-4 myBlacktext">Become a Neighbor</h2>
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-xl myLightBtn" })
+        <hr class="divider light my-4" />
+        <h3 class="mb-4 myBlacktext">OR</h3>
+        <hr class="divider light my-4" />
+        <h2 class="mb-4 myBlacktext">Interested in Coordinating Share Events?</h2>
+        <a class="btn btn-xl myLightBtn" href="#">Contact Us</a>
+    </div>
+</section>

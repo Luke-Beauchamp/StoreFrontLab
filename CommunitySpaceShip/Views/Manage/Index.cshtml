@@ -22,17 +22,18 @@
 </header>
 
 <!-- Profile-->
-<section class="page-section bg-primary" id="manage">
+<section class="page-section myBackground" id="manage">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h3 class="text-white mt-0">
-                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword")
-                : Html.ActionLink("Pick a password", "SetPassword"))
+                <h3 class="mt-0">
+                    @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "myBlacktext" })
+                : Html.ActionLink("Pick a password", "SetPassword", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "myBlacktext" }))
                             </h3>
                 <hr class="divider light my-4" />
-                <p class="text-white-50 mb-4">Not what you're looking for?</p>
-                <a class="btn btn-light btn-xl js-scroll-trigger" href="#information">Continue</a>
+                <p class="myBlacktext mb-4">Not what you're looking for?</p>
+                <a class="btn myLightBtn btn-xl js-scroll-trigger" href="#information">Continue</a>
+                @*Need to direct this continue to a Neighbor edit view of current user....*@
             </div>
         </div>
     </div>

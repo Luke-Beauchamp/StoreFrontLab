@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated && User.IsInRole("Admin"))
+{
+    <ul class="navbar-nav my-2 my-lg-0">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Admin
+            </a>
+            <div class="dropdown-menu myDropdown" aria-labelledby="navbarDropdown">
+                @Html.ActionLink("Manage Roles", "Index", "RolesAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                @Html.ActionLink("Manage Users", "Index", "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+            </div>
+        </li>
+    </ul>
+}

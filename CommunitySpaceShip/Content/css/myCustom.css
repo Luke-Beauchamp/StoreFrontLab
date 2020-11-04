@@ -1,3 +1,100 @@
-﻿.text-white > a {
-    color: #fff;
+﻿/*#region Variables*/
+:root {
+    --bg-color-1: #F2BB77; /*Light Brown*/
+    --bg-color-1-transparent: rgba(242,187,119, .7);
+    --bg-color-2: #78A658; /*Dark Green*/
+    --bg-color-2-transparent: rgba(120,166,88, .7);
+    --text-color-black: #0d0d0d; /*Black*/
+    --text-color-white: #f1f1f1; /*White*/
+    --text-color-1: #BF7256; /*Brown*/
+    --text-color-2: #B9D948; /*Light Green*/
+    --extra-color: #A1D929; /*Green / Link*/
+    --font-heading: 'Roboto',sans-serif;
+    --font-text: 'Poppins', sans-serif;
 }
+/*#endregion*/
+
+body {
+    font-family: var(--font-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+}
+
+.text-white {
+    color: var(--text-color-white) !important;
+}
+
+hr.divider {
+    border-color: var(--bg-color-1-transparent);
+}
+
+hr.light {
+    border-color: var(--text-color-white);
+}
+
+.myBtn {
+    color: var(--text-color-white);
+    background-color: var(--bg-color-1-transparent);
+    border-color: var(--bg-color-1);
+}
+
+.myLightBtn {
+    background-color: var(--text-color-white);
+}
+
+    .myBtn:hover, .myLightBtn:hover {
+        background-color: var(--text-color-1);
+    }
+
+.myBackground {
+    background-color: var(--bg-color-1);
+}
+
+.myBlacktext {
+    color: var(--text-color-black);
+}
+
+.myIcon {
+    color: var(--text-color-1);
+}
+
+.bg-light {
+    background-color: var(--text-color-white);
+}
+
+/*#region About Page Stuff*/
+.aboutHead {
+    background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url(../assets/img/bg-abouthead.jpg)!important;
+}
+/*#endregion*/
+
+/*#region Navbar Stuff*/
+#mainNav .navbar-nav .nav-item .nav-link{
+    font-family: var(--font-text);
+}
+
+.myDropdownLink {
+    color: var(--text-color-black) !important;
+    padding-left: .5em !important;
+}
+
+
+
+    #mainNav .navbar-nav .nav-item .nav-link:hover, #mainNav .navbar-nav .nav-item .nav-link:active, .myDropdownLink:hover {
+        color: var(--text-color-1) !important;
+    }
+
+@media (max-width: 991.98px) {
+    #mainNav {
+        background-color: var(--text-color-white);
+    }
+}
+
+@media (min-width: 992px) {
+    #mainNav.navbar-scrolled {
+        background-color: var(--text-color-white);
+    }
+}
+/*#endregion*/
