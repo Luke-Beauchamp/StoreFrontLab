@@ -10,12 +10,14 @@
             <div class="col-lg-10 align-self-end">
                 <h1 class="text-white font-weight-bold">Welcome Back,</h1>
                 <hr class="divider my-4" />
+                <h2 class="text-white font-weight-bold mb-4">@User.Identity.GetUserName()</h2>
             </div>
             <div class="col-lg-8 align-self-baseline">
-                <p class="text-white-75 font-weight-light mb-5">
+                @*<p class="text-white-75 font-weight-light mb-5">
                     @User.Identity.GetUserName()
-                </p>
-                <a class="btn btn-primary btn-xl js-scroll-trigger" href="#manage">Manage Profile</a>
+                </p>*@
+                <a class="btn myBtn btn-xl js-scroll-trigger" href="#manage">Manage Profile</a>
+                <!--Will put more functionality on this page in the future, for now its a little bare bones.-->
             </div>
         </div>
     </div>
@@ -32,7 +34,7 @@
                             </h3>
                 <hr class="divider light my-4" />
                 <p class="myBlacktext mb-4">Not what you're looking for?</p>
-                <a class="btn myLightBtn btn-xl js-scroll-trigger" href="#information">Continue</a>
+                <a class="btn myLightBtn btn-xl js-scroll-trigger" href="#">Share Packages</a>
                 @*Need to direct this continue to a Neighbor edit view of current user....*@
             </div>
         </div>

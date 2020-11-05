@@ -1,36 +1,48 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles Admin";
 }
 
-<h2>Index</h2>
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-white font-weight-bold">@ViewBag.Title</h1>
+                <hr class="divider my-4" />
+            </div>
+            <div class="col-lg-10 align-self-start">
+                <p>
+                    @Html.ActionLink("Create New Role", "Create", routeValues: null, htmlAttributes: new { @class = "myLink"})
+                </p>
+                <table class="table text-white">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Name)
-        </th>
-        <th>
+                        </th>
+                    </tr>
 
-        </th>
-    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "myLink" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "myLink" })
+                            </td>
+                        </tr>
+                    }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
-    }
+                </table>
+            </div>
+        </div>
+    </div>
+</header>
 
-</table>
+
+

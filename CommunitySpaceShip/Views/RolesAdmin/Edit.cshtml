@@ -1,41 +1,46 @@
 ﻿@model CommunitySpaceShip.Models.RoleViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit Roles";
 }
-
-<h2>Edit.</h2>
-
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Roles.</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Name, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Name)
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-white font-weight-bold">@ViewBag.Title</h1>
+                <hr class="divider my-4" />
             </div>
-        </div>
+            <div class="col-lg-10 align-self-start">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                    <div class="form-horizontal text-white">
+                        @Html.ValidationSummary(true)
+                        @Html.HiddenFor(model => model.Id)
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                            <div class="col-md-10 offset-md-1">
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-10 offset-md-1">
+                                <input type="submit" value="Save" class="btn btn-xl myBtn mb-3" />
+                            <br />
+                            @Html.ActionLink("Back to Roles", "Index", routeValues: null, htmlAttributes: new { @class = "myLink" })
+                            </div>
+                        </div>
+                    </div>
+                }
+
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+</header>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

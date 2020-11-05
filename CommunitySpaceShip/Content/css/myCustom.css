@@ -45,6 +45,7 @@ hr.light {
 }
 
     .myBtn:hover, .myLightBtn:hover {
+        color: var(--text-color-white);
         background-color: var(--text-color-1);
     }
 
@@ -58,6 +59,15 @@ hr.light {
 
 .myIcon {
     color: var(--text-color-1);
+}
+
+.myLink {
+    color: var(--bg-color-1-transparent);
+}
+
+.myLink:hover {
+    color: var(--text-color-1);
+    text-decoration: underline;
 }
 
 .bg-light {

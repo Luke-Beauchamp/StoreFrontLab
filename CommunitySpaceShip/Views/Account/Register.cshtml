@@ -11,7 +11,7 @@
             </div>
             <div class="col-lg-8 align-self-baseline">
                 <p class="text-white-75 font-weight-light mb-5">
-                    We are all on the same team.  I dream of the day when people everywhere can look past differences of any kind and remember that.  The next step towards being a part of community is by registering below.
+                    We are all on the same team.  I dream of the day when people everywhere can look past differences of any kind and remember we are in this together.  The next step towards being a part of Community Space-Ship is by registering below.
                 </p>
                 <a class="btn btn-xl js-scroll-trigger myBtn text-white" href="#register">Register</a>
             </div>
@@ -24,29 +24,29 @@
             @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
             {
                 @Html.AntiForgeryToken()
-                <h4>Create a new account.</h4>
+                <h4 class="text-center">Create a new account.</h4>
                 <hr />
                 @Html.ValidationSummary("", new { @class = "text-danger" })
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 offset-1 control-label" })
+                    <div class="col-md-10 offset-md-1">
                         @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 offset-1 control-label" })
+                    <div class="col-md-10 offset-md-1">
                         @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 offset-1 control-label" })
+                    <div class="col-md-10 offset-md-1">
                         @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-10 offset-md-1 text-center">
                         <input type="submit" class="btn btn-xl myLightBtn myBlacktext" value="Register" />
                     </div>
                 </div>

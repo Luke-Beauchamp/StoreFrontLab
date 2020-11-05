@@ -10,9 +10,7 @@
                 <h1 class="text-white font-weight-bold">Welcome Back, Neighbor!</em></h1>
                 <hr class="divider my-4" />
             </div>
-            <div class="col-lg-10 align-self-center">
-                
-
+            <div class="col-lg-10 align-self-start">
                 <section id="loginForm">
                     @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                     {
@@ -20,36 +18,36 @@
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
                             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label text-white" })
-                            <div class="col-md-10">
+                            <div class="col-md-10 offset-md-1">
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
                             @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label text-white" })
-                            <div class="col-md-10">
+                            <div class="col-md-10 offset-md-1">
                                 @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
                                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <div class="checkbox text-white">
+                            <div class="col-md-10 offset-md-1">
+                                <div class="checkbox text-center text-white">
                                     @Html.CheckBoxFor(m => m.RememberMe)
                                     @Html.LabelFor(m => m.RememberMe)
                                 </div>
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
+                            <div class="offset-md-1 col-md-10 text-center">
                                 <input type="submit" value="Log in" class="btn myBtn text-white" />
                             </div>
                         </div>
                         <p>
-                            @Html.ActionLink("Register a new user?", "Register")
+                            @Html.ActionLink("Register a new user?", "Register", routeValues: null, htmlAttributes: new { @class = "myLink" })
                         </p>
                         <p>
-                            @Html.ActionLink("Forget your password?", "ForgotPassword")
+                            @Html.ActionLink("Forget your password?", "ForgotPassword", routeValues: null, htmlAttributes: new { @class = "myLink" })
                         </p>
                     }
                 </section>
@@ -57,16 +55,6 @@
         </div>
     </div>
 </header>
-<!-- About-->
-<section class="page-section myBackground" id="about">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8 text-center">
-                
-            </div>
-        </div>
-    </div>
-</section>
 
 
 

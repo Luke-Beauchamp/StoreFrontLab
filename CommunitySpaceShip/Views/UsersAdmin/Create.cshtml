@@ -1,52 +1,63 @@
 ﻿@model CommunitySpaceShip.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Create New User";
 }
 
-<h2>@ViewBag.Title.</h2>
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center justify-content-center text-center">
+            <div class="col-lg-10 align-self-end">
+                <h1 class="text-white font-weight-bold">@ViewBag.Title</h1>
+                <hr class="divider my-4" />
+            </div>
+            <div class="col-lg-10 align-self-start text-white">
+                @using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary("", new { @class = "text-error" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                        <div class="col-12 offset-0 col-md-10 offset-md-1">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                        <div class="col-12 offset-0 col-md-10 offset-md-1">
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                        <div class="col-12 offset-0 col-md-10 offset-md-1">
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <span class="col-12 offset-0 col-md-10 offset-md-1">
+                            Role:
+                            @foreach (var item in (SelectList)ViewBag.RoleId)
+                            {
+                                <span class="p-2">
+                                <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
+                                @Html.Label(item.Value, new { @class = "control-label" })
+                            </span>
+                            }
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12 offset-0 col-md-10 offset-md-1">
+                            <input type="submit" class="btn btn-xl myBtn mb-3" value="Create User" />
+                            <br />
+                            @Html.ActionLink("Back to Users", "Index", routeValues: null, htmlAttributes: new { @class = "myLink" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</header>
 
-@using (Html.BeginForm("Create", "UsersAdmin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-error" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-md-2 control-label">
-            Select User Role
-        </label>
-        <div class="col-md-10">
-            @foreach (var item in (SelectList)ViewBag.RoleId)
-            {
-                <input type="checkbox" name="SelectedRoles" value="@item.Value" class="checkbox-inline" />
-                @Html.Label(item.Value, new { @class = "control-label" })
-            }
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Create" />
-        </div>
-    </div>
-}
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
