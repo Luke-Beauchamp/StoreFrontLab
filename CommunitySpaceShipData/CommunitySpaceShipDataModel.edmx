@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CommunityGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CommunityGardenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="CategoryID" />
@@ -19,7 +19,7 @@
           <Property Name="NeighborID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="RegionID" Type="int" Nullable="false" />
           <Property Name="ProduceAvailable" Type="bit" Nullable="false" />
           <Property Name="DairyAvailable" Type="bit" Nullable="false" />
@@ -31,8 +31,9 @@
           </Key>
           <Property Name="ParkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RegionID" Type="int" Nullable="false" />
+          <Property Name="ParkName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="State" Type="nvarchar" MaxLength="2" Nullable="false" />
           <Property Name="ZipCode" Type="nvarchar" MaxLength="13" Nullable="false" />
         </EntityType>
@@ -56,7 +57,7 @@
           <Key>
             <PropertyRef Name="ShareEventID" />
           </Key>
-          <Property Name="ShareEventID" Type="int" Nullable="false" />
+          <Property Name="ShareEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ParkID" Type="int" Nullable="false" />
           <Property Name="Coordinator" Type="int" Nullable="false" />
           <Property Name="Date" Type="date" Nullable="false" />
@@ -211,8 +212,7 @@
             <End Role="SharePackages" EntitySet="SharePackages" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CommunityGardenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -231,7 +231,7 @@
           <Property Name="NeighborID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
           <Property Name="ProduceAvailable" Type="Boolean" Nullable="false" />
           <Property Name="DairyAvailable" Type="Boolean" Nullable="false" />
@@ -247,11 +247,12 @@
           <Property Name="ParkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RegionID" Type="Int32" Nullable="false" />
           <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ZipCode" Type="String" MaxLength="13" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Region" Relationship="Self.FK_Parks_Regions" FromRole="Parks" ToRole="Regions" />
           <NavigationProperty Name="ShareEvents" Relationship="Self.FK_ShareEvents_Parks" FromRole="Parks" ToRole="ShareEvents" />
+          <Property Name="ParkName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Region">
           <Key>
@@ -469,6 +470,7 @@
           <EntitySetMapping Name="Parks">
             <EntityTypeMapping TypeName="CommunityGardenModel.Park">
               <MappingFragment StoreEntitySet="Parks">
+                <ScalarProperty Name="ParkName" ColumnName="ParkName" />
                 <ScalarProperty Name="ParkID" ColumnName="ParkID" />
                 <ScalarProperty Name="RegionID" ColumnName="RegionID" />
                 <ScalarProperty Name="City" ColumnName="City" />

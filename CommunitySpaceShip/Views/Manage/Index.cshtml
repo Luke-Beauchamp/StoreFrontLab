@@ -1,4 +1,5 @@
 ﻿@model CommunitySpaceShip.Models.IndexViewModel
+    @using CommunitySpaceShip.Models
 @using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Your Account";
@@ -8,7 +9,7 @@
     <div class="container h-100">
         <div class="row h-100 align-items-center justify-content-center text-center">
             <div class="col-lg-10 align-self-end">
-                <h1 class="text-white font-weight-bold">Welcome Back,</h1>
+                <h1 class="text-white font-weight-bold">Welcome Back, @User.Identity.GetUserName</h1>
                 <hr class="divider my-4" />
                 <h2 class="text-white font-weight-bold mb-4">@User.Identity.GetUserName()</h2>
             </div>
@@ -30,11 +31,12 @@
             <div class="col-lg-8 text-center">
                 <h3 class="mt-0">
                     @(Model.HasPassword ? Html.ActionLink("Change your password", "ChangePassword", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "myBlacktext" })
-                : Html.ActionLink("Pick a password", "SetPassword", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "myBlacktext" }))
-                            </h3>
+                        : Html.ActionLink("Pick a password", "SetPassword", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "myBlacktext" }))
+                </h3>
                 <hr class="divider light my-4" />
                 <p class="myBlacktext mb-4">Not what you're looking for?</p>
-                <a class="btn myLightBtn btn-xl js-scroll-trigger" href="#">Share Packages</a>
+                <a class="btn myLightBtn btn-xl js-scroll-trigger" href="@Url.Action("Index","SharePackages")">Share Packages</a>
+                @Html.ActionLink("Neighbor Profile", "CreateUser", "Neighbor", routeValues: null, htmlAttributes: new {  @class = "btn btn-xl myLightBtn" })
                 @*Need to direct this continue to a Neighbor edit view of current user....*@
             </div>
         </div>

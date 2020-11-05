@@ -9,6 +9,12 @@
             <div class="dropdown-menu myDropdown" aria-labelledby="navbarDropdown">
                 @Html.ActionLink("Manage Roles", "Index", "RolesAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
                 @Html.ActionLink("Manage Users", "Index", "UsersAdmin", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                <div class="dropdown-divider"></div>
+                @Html.ActionLink("Manage Neighbors", "Index", "Neighbors", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                @Html.ActionLink("Manage Regions", "Index", "Regions", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                @Html.ActionLink("Manage Parks", "Index", "Parks", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                @Html.ActionLink("Manage Shareables", "Index", "Shareables", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
+                @Html.ActionLink("Manage Categories", "Index", "Categories", routeValues: null, htmlAttributes: new { @class = "nav-link myDropdownLink" })
             </div>
         </li>
     </ul>

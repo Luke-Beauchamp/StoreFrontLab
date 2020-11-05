@@ -16,38 +16,46 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <div class="form-horizontal text-white">
-                        @Html.ValidationSummary(true)
-                        @Html.HiddenFor(model => model.Id)
+                <div class="form-horizontal text-white">
+                    @Html.ValidationSummary(true)
+                    @Html.HiddenFor(model => model.Id)
 
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Email, new { @class = "control-label" })
-                            <div class="col-md-10 offset-md-1">
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.Email)
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <span class=" col-md-10 offset-md-1">
-                                @Html.Label("Roles: ", new { @class = "control-label" })
-                                @foreach (var item in Model.RolesList)
-                                {
-                                    <span class="p-2">
-                                        <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
-                                        @Html.Label(item.Value, new { @class = "control-label" })
-                                    </span>
-                                }
-                            </span>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="offset-md-1 col-md-10">
-                                <input type="submit" value="Save" class="btn btn-xl myBtn mb-3" />
-                                <br />
-                                @Html.ActionLink("Back to Users", "Index", routeValues: null, htmlAttributes: new { @class = "myLink" })
-                            </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, new { @class = "control-label" })
+                        <div class="col-md-10 offset-md-1">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
                         </div>
                     </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DisplayName, new { @class = "control-label" })
+                        <div class="col-md-10 offset-md-1">
+                            @Html.TextBoxFor(m => m.DisplayName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <span class=" col-md-10 offset-md-1">
+                            @Html.Label("Roles: ", new { @class = "control-label" })
+                            @foreach (var item in Model.RolesList)
+                            {
+                                <span class="p-2">
+                                    <input type="checkbox" name="SelectedRole" value="@item.Value" checked="@item.Selected" class="checkbox-inline" />
+                                    @Html.Label(item.Value, new { @class = "control-label" })
+                                </span>
+                            }
+                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="offset-md-1 col-md-10">
+                            <input type="submit" value="Save" class="btn btn-xl myBtn mb-3" />
+                            <br />
+                            @Html.ActionLink("Back to Users", "Index", routeValues: null, htmlAttributes: new { @class = "myLink" })
+                        </div>
+                    </div>
+                </div>
                 }
             </div>
         </div>

@@ -10,6 +10,10 @@ namespace CommunitySpaceShipData
     [MetadataType(typeof(NeighborMetadata))]
     public partial class Neighbor
     {
+        public string FullName
+        {
+            get { return $"{FirstName} {LastName}"; }
+        }
     }
 
     public class NeighborMetadata //Consider making some use out of the this.ShareEvents and this.SharePackages
@@ -45,6 +49,9 @@ namespace CommunitySpaceShipData
         [Display(Name = "Eggs Available")]
         [Required(ErrorMessage = "[-Eggs Available is required-]")]
         public bool EggsAvailable { get; set; }
+
+        [Display(Name = "Name")]
+        public string FullName { get; set; }
     }
 
     [MetadataType(typeof(RegionMetadata))]
@@ -96,20 +103,28 @@ namespace CommunitySpaceShipData
         [Required(ErrorMessage = "[-Address is required-]")]
         public string Address { get; set; }
 
-        [StringLength(50, ErrorMessage = "[-State must be abbreviated-]")]
+        [StringLength(2, ErrorMessage = "[-State must be abbreviated-]")]
         [Required(ErrorMessage = "[-State is required-]")]
         public string State { get; set; }
 
         [Display(Name = "Zip Code")]
-        [StringLength(50, ErrorMessage = "[-Zip Code must be between 5 and 13 characters long-]", MinimumLength = 5)]
+        [StringLength(13, ErrorMessage = "[-Zip Code must be between 5 and 13 characters long-]", MinimumLength = 5)]
         [Required(ErrorMessage = "[-Zip Code is required-]")]
         public string ZipCode { get; set; }
+
+        [Display(Name = "Park Name")]
+        [StringLength(50, ErrorMessage = "[-Park Name must be 50 characters or less-]")]
+        [Required(ErrorMessage = "[-Park Name is required-]")]
+        public string ParkName { get; set; }
     }
 
     [MetadataType(typeof(ShareEventMetadata))]
     public partial class ShareEvent
     {
-
+        public string CoordinatorName
+        {
+            get { return $"{Neighbor.FirstName} {Neighbor.LastName}"; }
+        }
     }
 
     public class ShareEventMetadata
@@ -136,6 +151,9 @@ namespace CommunitySpaceShipData
         [Display(Name = "End Time")]
         [Required(ErrorMessage = "[-End Time is required-]")]
         public byte EndTime { get; set; }
+
+        [Display(Name = "Coordinator Name")]
+        public string CoordinatorName { get; }
     }
 
     [MetadataType(typeof(SharePackageMetadata))]

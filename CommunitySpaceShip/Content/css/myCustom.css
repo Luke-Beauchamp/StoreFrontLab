@@ -61,6 +61,10 @@ hr.light {
     color: var(--text-color-1);
 }
 
+a.myIcon:hover {
+
+}
+
 .myLink {
     color: var(--bg-color-1-transparent);
 }

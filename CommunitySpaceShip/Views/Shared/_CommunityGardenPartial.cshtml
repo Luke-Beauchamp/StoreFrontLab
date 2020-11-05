@@ -10,6 +10,12 @@
             <a class="nav-link myDropdownLink" href="@Url.Action("About","Home")">About</a>@*Will be About of Home Controller*@
             <a class="nav-link myDropdownLink" href="#">Sharing Events</a>@*Will be index of ShareEvents Controller*@
             <a class="nav-link myDropdownLink" href="#">My Share Packages</a>@*Will be index of SharePackages Controller*@
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="dropdown-divider"></div>
+                <a class="nav-link myDropdownLink" href="@Url.Action("Index", "ShareEvents")">Manage Events</a>
+                <a class="nav-link myDropdownLink" href="@Url.Action("Index", "SharePackages")">Manage Packages</a>
+            }
         </div>
     </li>
 </ul>
